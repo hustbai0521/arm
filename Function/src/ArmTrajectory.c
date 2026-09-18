@@ -19,8 +19,6 @@
 /* A 25 unit/s path caps the calibrated big-arm motor just below 0.8 rad/s. */
 #define ARM_TP_DEFAULT_MAX_SPEED_JOINT 40.0f
 #define ARM_TP_DEFAULT_MAX_ACCEL_JOINT 100.0f
-#define ARM_TP_BIG_MIN_SPEED_RAD_S 0.017454f
-#define ARM_TP_BIG_FINAL_SPEED_RAD_S 1.0f
 
 #define ARM_TP_BIG_RAD_PER_UNIT \
     ((ARM_TRAJECTORY_BIG_AT_BASE_100_RAD - ARM_TRAJECTORY_BIG_ZERO_RAD) / \
@@ -754,21 +752,12 @@ static void ArmTrajectory_AtTarget(ArmTrajectory* trajectory) {
 static void ArmTrajectory_FillMotorCommand(
     const ArmTrajectory* trajectory,
     ArmTrajectoryMotorCommand* command) {
-    float big_speed;
-
     ArmTrajectory_JointToMotor(trajectory->CurBasePos,
                                trajectory->CurJointPos,
                                &command->big_position_rad,
                                &command->small_position_rad);
-    big_speed = fabsf(trajectory->CurBaseVel * ARM_TP_BIG_RAD_PER_UNIT);
-    if (trajectory->State == ARM_TP_IDLE) {
-        big_speed = ARM_TP_BIG_FINAL_SPEED_RAD_S;
-    } else {
-        big_speed = ArmTrajectory_Clamp(big_speed,
-                                        ARM_TP_BIG_MIN_SPEED_RAD_S,
-                                        ARM_TP_BIG_FINAL_SPEED_RAD_S);
-    }
-    command->big_max_speed_rad_s = big_speed;
+    command->big_speed_rad_s =
+        trajectory->CurBaseVel * ARM_TP_BIG_RAD_PER_UNIT;
     command->small_speed_rad_s =
         trajectory->CurJointVel *
         ArmTrajectory_SmallMotorRadPerJointUnit(trajectory->CurJointPos);

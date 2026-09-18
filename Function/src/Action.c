@@ -24,18 +24,18 @@
 /** 位置动作的默认完成误差，单位 rad；应在新机构完成实测后重新标定。 */
 #define ARM_POSITION_OK_RANGE 0.02f
 
-/** 大臂轨迹点使用脉塔位置模式。 */
-#define ARM_LIFT_BIG_CONTROL_MODE MYACTUATOR_CTRL_POSITION
-#define ARM_LIFT_BIG_TORQUE 0.0f
-#define ARM_LIFT_BIG_KP 0.0f
-#define ARM_LIFT_BIG_KD 0.0f
+/** 大臂轨迹点使用脉塔 Motion 模式；先以保守刚度/阻尼作为实机调参起点。 */
+#define ARM_LIFT_BIG_CONTROL_MODE MYACTUATOR_CTRL_MOTION
+#define ARM_LIFT_BIG_TORQUE 0.05f
+#define ARM_LIFT_BIG_KP 45.0f
+#define ARM_LIFT_BIG_KD 0.5f
 
 /** 小臂轨迹点使用达妙 MIT 位置 + 速度前馈控制。 */
 #define ARM_DAMIAO_POSITION_TORQUE 0.0f
-#define ARM_DAMIAO_POSITION_KP 30.0f
-#define ARM_DAMIAO_POSITION_KD 0.3f
+#define ARM_DAMIAO_POSITION_KP 40.0f
+#define ARM_DAMIAO_POSITION_KD 0.5f
 #define ARM_STARTUP_COMMAND_PERIOD_TICKS 20U
-#define ARM_STARTUP_BIG_SPEED_RAD_S 1.0f
+#define ARM_STARTUP_BIG_VELOCITY_RAD_S 0.0f
 
 /* ========================================================================== 
  * 本地类型
@@ -77,7 +77,8 @@ static const ActionStep ARM_STOP[] = {
 static const ActionStep ARM_LIFT[] = {
 	  STP_ARM_TP_JOINT(45.0f, 90.0f, 1000U),
 	  STP_ARM_TP_JOINT(70.0f, -70.0f, 1000U),
-	  STP_ARM_TP_JOINT(0.0f, 90.0f, 0U),
+	  STP_ARM_TP_JOINT(0.0f, 90.0f, 1000U),
+	  STP_ARM_TP_JOINT(70.0f, -120.0f, 0U),
 	
 };
 
@@ -231,12 +232,12 @@ static void Arm_PublishSmallPositionCommand(ActionArmDevice* arm,
     Arm_EndCommandUpdate(&command->sequence, updating_sequence);
 }
 
-/** @brief 用位置模式首帧使能脉塔，并通过其应答取得新鲜位置反馈。 */
+/** @brief 用 Motion 保持帧使能脉塔，并通过其应答取得新鲜位置反馈。 */
 static void Arm_PublishBigStartupCommand(ActionArmDevice* arm) {
     Arm_PublishBigCommand(arm,
                           ARM_LIFT_BIG_CONTROL_MODE,
                           arm->startup_big_hold_position,
-                          ARM_STARTUP_BIG_SPEED_RAD_S,
+                          ARM_STARTUP_BIG_VELOCITY_RAD_S,
                           ARM_LIFT_BIG_TORQUE,
                           ARM_LIFT_BIG_KP,
                           ARM_LIFT_BIG_KD);
@@ -294,7 +295,7 @@ static bool Arm_PublishTrajectoryCommand(
     limit = &arm->small_motor->limit;
     if (!Arm_IsBigCommandValid(ARM_LIFT_BIG_CONTROL_MODE,
                                trajectory_command->big_position_rad,
-                               trajectory_command->big_max_speed_rad_s,
+                               trajectory_command->big_speed_rad_s,
                                ARM_LIFT_BIG_TORQUE,
                                ARM_LIFT_BIG_KP,
                                ARM_LIFT_BIG_KD) ||
@@ -309,7 +310,7 @@ static bool Arm_PublishTrajectoryCommand(
     Arm_PublishBigCommand(arm,
                           ARM_LIFT_BIG_CONTROL_MODE,
                           trajectory_command->big_position_rad,
-                          trajectory_command->big_max_speed_rad_s,
+                          trajectory_command->big_speed_rad_s,
                           ARM_LIFT_BIG_TORQUE,
                           ARM_LIFT_BIG_KP,
                           ARM_LIFT_BIG_KD);

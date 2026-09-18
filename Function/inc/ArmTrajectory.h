@@ -53,7 +53,7 @@ typedef enum {
 
 typedef struct {
     float big_position_rad;
-    float big_max_speed_rad_s;
+    float big_speed_rad_s;
     float small_position_rad;
     float small_speed_rad_s;
 } ArmTrajectoryMotorCommand;

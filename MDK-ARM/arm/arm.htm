@@ -3,7 +3,7 @@
 <title>Static Call Graph - [arm\arm.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image arm\arm.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Sep 17 20:31:54 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Sep 18 13:50:35 2026
 <BR><P>
 <H3>Maximum Stack Usage =        560 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -3824,7 +3824,7 @@ Local Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Arm_PublishBigCommand
 </UL>
 
-<P><STRONG><a name="[af]"></a>Arm_Exec</STRONG> (Thumb, 434 bytes, Stack size 32 bytes, action.o(i.Arm_Exec))
+<P><STRONG><a name="[af]"></a>Arm_Exec</STRONG> (Thumb, 438 bytes, Stack size 32 bytes, action.o(i.Arm_Exec))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = Arm_Exec &rArr; Arm_PublishStartupCommands &rArr; Arm_PublishBigCommand
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_Abort
@@ -3925,7 +3925,7 @@ Local Symbols
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Arm_Exec
 </UL>
 
-<P><STRONG><a name="[11c]"></a>Arm_PublishTrajectoryCommand</STRONG> (Thumb, 170 bytes, Stack size 24 bytes, action.o(i.Arm_PublishTrajectoryCommand))
+<P><STRONG><a name="[11c]"></a>Arm_PublishTrajectoryCommand</STRONG> (Thumb, 174 bytes, Stack size 24 bytes, action.o(i.Arm_PublishTrajectoryCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = Arm_PublishTrajectoryCommand &rArr; Arm_PublishBigCommand
 </UL>
 <BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Arm_PublishSmallPositionCommand
@@ -4134,17 +4134,15 @@ Local Symbols
 <P><STRONG><a name="[fa]"></a>ArmTrajectory_Clamp</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, armtrajectory.o(i.ArmTrajectory_Clamp))
 <BR><BR>[Called By]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_StartJointAngles
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_StartJointTarget
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_FillMotorCommand
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_ApplyTheta2Compensation
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_ApplyPoint
 </UL>
 
-<P><STRONG><a name="[ff]"></a>ArmTrajectory_FillMotorCommand</STRONG> (Thumb, 120 bytes, Stack size 16 bytes, armtrajectory.o(i.ArmTrajectory_FillMotorCommand))
+<P><STRONG><a name="[ff]"></a>ArmTrajectory_FillMotorCommand</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, armtrajectory.o(i.ArmTrajectory_FillMotorCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = ArmTrajectory_FillMotorCommand &rArr; ArmTrajectory_JointToMotor &rArr; ArmTrajectory_SelectSmallSegmentByTheta &rArr; ArmTrajectory_SmallNeg90CalibrationValid &rArr; ArmTrajectory_SmallTheta0CalibrationValid
 </UL>
 <BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_JointToMotor
 <LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_SelectSmallSegmentByTheta
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_Clamp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ArmTrajectory_Update
 </UL>
