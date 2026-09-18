@@ -1,0 +1,14 @@
+arm\arm2r.o: ..\Function\src\Arm2R.c
+arm\arm2r.o: ../Function/inc/Arm2R.h
+arm\arm2r.o: E:\stm32\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+arm\arm2r.o: E:\stm32\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+arm\arm2r.o: E:\stm32\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stddef.h
+arm\arm2r.o: ../Core/Inc/FreeRTOSConfig.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+arm\arm2r.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+arm\arm2r.o: E:\stm32\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+arm\arm2r.o: E:\stm32\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
